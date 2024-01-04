@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import './colors.scss';
+.link-style{
+    color:$secondary-color;
+}
+.form-container{
+    border-radius: 25px;
+}

@@ -1,0 +1,21 @@
+@import '../colors.scss';
+.submit-button{
+    background: $primary-color;
+    color: white;
+    padding: 10px;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: 3.5rem;
+    width: 6rem;
+    border-radius: 10px;
+    transition: $smooth;
+    &:hover{
+        background: $secondary-color;
+    }
+}
+.input-box{
+    &:focus{
+        border: $primary-color;
+    }
+    
+}
