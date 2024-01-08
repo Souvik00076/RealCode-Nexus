@@ -4,13 +4,23 @@
     color: white;
     padding: 10px;
     margin-top: 1rem;
-    margin-left: auto;
-    margin-right: 3.5rem;
-    width: 6rem;
+    width: 12rem;
     border-radius: 10px;
     transition: $smooth;
     &:hover{
         background: $secondary-color;
+    }
+}
+.cp-room{
+    background: $color-btn-green;
+    &:hover{
+        background: $color-btn-green-secondary;
+    }
+}
+.lv-room{
+    background: $color-btn-red;
+    &:hover{
+        background: $color-btn-red-secondary;
     }
 }
 .input-box{
@@ -18,4 +28,14 @@
         border: $primary-color;
     }
     
+}
+
+.client-list{
+    margin-top: 1rem;
+    height:100%;
+    max-height: 20rem;
+}
+
+.client{
+    margin-top: 0.6rem;
 }

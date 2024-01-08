@@ -1,5 +1,18 @@
 import React from 'react'
 import '../App.scss'
-export default function Button(props) {
-     return <button className='submit-button'>{props.name}</button>
+const Button=(props)=>{
+     const joinRoom=()=>{
+          props.onClick()
+     }
+     const handleInputEnter=(e)=>{
+          if(props.onKeyUp){
+               props.onKeyUp(e)
+          }
+     }
+     return <button className={`submit-button ${props.class_name}`} 
+               onClick={joinRoom} 
+               onKeyUp={handleInputEnter}>
+               {props.name}
+               </button>
 }
+export default Button
