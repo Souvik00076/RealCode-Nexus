@@ -1,11 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../App.scss'
 import ACTIONS from '../ACTIONS';
-const Languages = ({socketRef,roomId}) => {
+import MESSAGES from '../MESSAGES';
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript.js'
+import python from 'highlight.js/lib/languages/python.js'
+import php from 'highlight.js/lib/languages/php.js'
+import ruby from 'highlight.js/lib/languages/ruby.js'
+import sql from 'highlight.js/lib/languages/sql.js'
+import swift from 'highlight.js/lib/languages/swift.js'
+import xml from 'highlight.js/lib/languages/xml.js'
+
+
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('sql', sql)
+hljs.registerLanguage('swift', swift)
+hljs.registerLanguage('xml', xml)
+hljs.registerLanguage('python', python)
+hljs.registerLanguage('ruby', ruby)
+hljs.registerLanguage('php', php)
+
+const Languages = ({socketRef,roomId,onLanguageChange}) => {
   const [selectedLanguage, setSelectedLanguage] = useState('')
   const [showList, setShowList] = useState(false)
   const dropdownRef = useRef(null)
-
   const topLanguages = [
     'JavaScript',
     'Python',
@@ -15,23 +33,20 @@ const Languages = ({socketRef,roomId}) => {
     'SQL',
     'XML'
   ]
-
-  const handleLanguageChange = (language) => {
-    setSelectedLanguage(language)
-    setShowList(false)
-    // You can perform additional actions based on the selected language
-    console.log(language,"selected")
+  const handleLanguageChange = (language) => {    
+    if(socketRef && socketRef.current){
     socketRef.current.emit(ACTIONS.PLATFORM_CHANGE,{
             roomId,
             language:language.toLowerCase()
     })
-
+    setSelectedLanguage(language)
+    setShowList(false)
+    }
   }
 
   const toggleList = () => {
     setShowList(!showList)
   }
-
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowList(false)
@@ -45,7 +60,33 @@ const Languages = ({socketRef,roomId}) => {
       document.removeEventListener('click', handleClickOutside);
     }
   }, [])
+  useEffect(()=>{
+    if(socketRef.current){
+      socketRef.current.on(ACTIONS.PLATFORM_CHANGE,({language})=>{     
+      onLanguageChange(MESSAGES[language.toUpperCase()])
+      setSelectedLanguage(language)  
+      })
+      socketRef.current.on(ACTIONS.SYNC_CODE,({code})=>{
+        let str='JAVASCRIPT'
+        if(code===null) str=MESSAGES['JAVASCRIPT']
+        onLanguageChange(code || str)
+        if(code){
+        const languageDetected = hljs.highlightAuto(code).language
+          topLanguages.forEach((item)=>{
+          if(item.toUpperCase()===languageDetected.toUpperCase()){
+            setSelectedLanguage(item)
+             }
+        })
+      }
 
+      })   
+      socketRef.current.on(ACTIONS.CODE_CHANGE,({code})=>{
+        console.log("On Code Change called")
+          onLanguageChange(code)
+      })
+      }
+    }
+  ,[socketRef.current])
   return (
     <div  ref={dropdownRef}>
       <div className='z-10 absolute origin-top-right top-4 right-10'>

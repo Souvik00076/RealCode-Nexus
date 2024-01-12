@@ -30,6 +30,7 @@ const EditorPage=()=>{
           username:location.state?.userName
         })
         socketRef.current.on(ACTIONS.JOINED,({clientList,username,socketId})=>{
+            
             if(username!==location.state?.userName){
               console.log("new join")
               //TODO : Show toast here
