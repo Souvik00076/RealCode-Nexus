@@ -1,6 +1,6 @@
 import React from 'react'
 import Avatar from 'react-avatar'
-import './styles.scss'
+import './style.scss'
 const Client = (props) => {
   return (
     <div className='client'>

@@ -56,7 +56,6 @@ const Home = () => {
       console.log("RoomID OR Username not provided")
       return 
     }
-    
     navigate(`/editor/${roomId}`,{
       state:{
         userName

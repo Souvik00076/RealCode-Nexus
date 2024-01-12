@@ -1,7 +1,8 @@
 import React from 'react'
 import '../App.scss'
 const Button=(props)=>{
-     const joinRoom=()=>{
+
+     const onclick=()=>{
           props.onClick()
      }
      const handleInputEnter=(e)=>{
@@ -10,7 +11,7 @@ const Button=(props)=>{
           }
      }
      return <button className={`submit-button ${props.class_name}`} 
-               onClick={joinRoom} 
+               onClick={onclick} 
                onKeyUp={handleInputEnter}>
                {props.name}
                </button>
