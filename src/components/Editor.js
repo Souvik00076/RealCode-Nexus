@@ -46,7 +46,7 @@ const Editor = ({socketRef,roomId,onCodeChange}) => {
   useEffect(()=>{
   },[socketRef.current])
   return(
-      <div className='w-4/5 px-4 py-2 h-full relative'>
+      <div className='w-full sm:w-[80%] px-4 py-2 h-full relative'>
       <div className='w-[100%] h-full' id='realtime-editor'>
       <Languages className='z-10' socketRef={socketRef}  roomId={roomId} onLanguageChange={(language)=>{
             editorRef.current.setValue(language)

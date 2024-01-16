@@ -61,7 +61,7 @@ const EditorPage=()=>{
  
 
   return (
-    <div className='main-wrapper flex flex-row'>
+    <div className='w-full h-full flex flex-row'>
       <LeftComp clients={clients} roomId={roomId}/>
       <Editor socketRef={socketRef} roomId={roomId} onCodeChange={(code)=>{
         codeRef.current=code

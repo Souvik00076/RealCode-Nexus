@@ -19,7 +19,7 @@ const LeftComp=({clients,roomId})=>{
 
   return (
   <>
-<div className='w-[20%] h-screen flex flex-col py-1 px-4'>
+<div className='hidden sm:w-[20%] lg:block h-screen flex flex-col py-1 px-4'>
   <div className="mb-4 flex-grow ">
     <img src='/real-code-nexus.png' alt='Logo' className='w-full h-24'/>
     <div className="border-t border-gray-300 my-4"></div>

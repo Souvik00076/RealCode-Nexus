@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'lt-sm': '(max-width: 768px)', // Define a breakpoint for less than 728px
+      },
+    },
   },
   plugins: [],
 }
