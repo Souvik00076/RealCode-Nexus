@@ -1,10 +1,15 @@
 const express=require('express')
 const ACTIONS = require('./src/ACTIONS')
 const app=express()
+const path=require('path')
 app.use(express.static('build'))
-const PORT=3300 || process.env.PORT
 
+const PORT=3300 || process.env.PORT
 const userMap={}
+
+app.use((req,res,next)=>{
+    res.sendFile(path.join(__dirname,'build','index.html'))
+})
 const server=app.listen(PORT,()=>{
     console.log(`server started at port ${PORT}`)
 })
