@@ -8,5 +8,5 @@ export const initSocket=async()=>{
         timeout:16000,
         transports:['websocket']
     }
-    return io('http://localhost:3300',options)
+    return io(process.env.REACT_APP_SERVER_URL,options)
 }
