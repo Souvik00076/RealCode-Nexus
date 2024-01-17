@@ -22,7 +22,8 @@
   },
   "scripts": {
     "start:dev": "react-scripts start",
-    "start":"npm run build && npm run server:prod",
+    "start":" npm run dep:dev && npm run build && npm run server:prod",
+    "dep:dev":"npm install --save-dev @babel/plugin-proposal-private-property-in-object",
     "server:prod":"node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
