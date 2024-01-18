@@ -4,7 +4,7 @@ const app=express()
 const path=require('path')
 app.use(express.static('build'))
 
-const PORT=process.env.PORT
+const PORT=5000 || process.env.PORT
 const userMap={}
 
 app.use((req,res,next)=>{
