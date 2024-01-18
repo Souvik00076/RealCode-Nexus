@@ -2,6 +2,8 @@ const express=require('express')
 const ACTIONS = require('./src/ACTIONS')
 const app=express()
 const path=require('path')
+const http = require('http');
+const {Server}=require('socket.io')
 app.use(express.static('build'))
 
 const PORT=5000 || process.env.PORT
@@ -10,11 +12,9 @@ const userMap={}
 app.use((req,res,next)=>{
     res.sendFile(path.join(__dirname,'build','index.html'))
 })
-const server=app.listen(PORT,()=>{
-    console.log(`server started at port ${PORT}`)
-})
 
-const io=require('socket.io')(server)
+const server = http.createServer(app);
+const io = new Server(server);
 const getAllConnectedClients=(roomId)=>{
     const clientMap=io.sockets.adapter.rooms.get(roomId)
     const clientList=Array
@@ -65,3 +65,4 @@ io.on('connection',(socket)=>{
         })
     
 })
+server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
