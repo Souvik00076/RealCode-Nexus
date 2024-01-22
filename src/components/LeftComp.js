@@ -2,19 +2,20 @@ import React,{useState} from 'react'
 import './style.scss'
 import Client from './Client'
 import Button from './Button'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const LeftComp=({clients,roomId})=>{
+  const reactNavigator=useNavigate()
   const copyRoomId=async ()=>{
     try{
       await navigator.clipboard.writeText(roomId)
     }catch(err){
+
     }
   }
   const leaveRoom=()=>{
     console.log("on click");
-     <Navigate to='/'/>
-     
+    reactNavigator('/')
   }
 
   return (
@@ -30,8 +31,8 @@ const LeftComp=({clients,roomId})=>{
     </div>
   </div>
   <div className='flex flex-col items-center fixed bottom-0 mb-4'>
-    <Button name="Copy Room ID" class_name="cp-room" onClick={leaveRoom}/>
-    <Button name="Leave" class_name="lv-room" onClick={copyRoomId}/>   
+    <Button name="Copy Room ID" class_name="cp-room" onClick={copyRoomId}/>
+    <Button name="Leave" class_name="lv-room" onClick={leaveRoom}/>   
   </div>
 </div>
   </>
